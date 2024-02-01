@@ -10,13 +10,10 @@ static ALPHABET: [char; 26] = [
     't', 'u', 'v', 'w', 'x', 'y', 'z',
 ];
 
-//static SUBS: Vec<char> = vec!['a'];
-fn substitute(text: &str) {
-    let a: String = text
-        .chars()
+fn substitute(text: &str) -> String {
+    text.chars()
         .map(|c: char| SUBS[ALPHABET.iter().position(|&s| s == c).unwrap()])
-        .collect();
-    println!("{:?}", a);
+        .collect()
 }
 
 #[cfg(test)]
@@ -24,7 +21,8 @@ mod tests {
     use super::substitute;
 
     #[test]
-    fn test_something() {
-        substitute(&"abc".to_string());
+    fn correct_results() {
+        assert_eq!(substitute(&"abc".to_string()), "wac", "wrong result");
+        assert_eq!(substitute(&"xyz".to_string()), "oyh", "wrong result");
     }
 }
